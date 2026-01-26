@@ -18,8 +18,9 @@ export interface CodeGenBusinessParams {
   class_name?: string;
   schema_name?: string;
   filename?: string;
-  default_datetime_column?: boolean;
+  datetime_mixin?: boolean;
   api_version?: string;
+  tag?: string;
   gen_path?: string;
   remark?: string;
 }
