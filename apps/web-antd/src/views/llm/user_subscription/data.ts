@@ -7,6 +7,8 @@ import type { UserSubscription } from '#/api/llm/user_subscription';
 
 import { $t } from '@vben/locales';
 
+import { getDictOptions } from '#/utils/dict';
+
 /**
  * Query form schema
  */
@@ -33,7 +35,10 @@ export const querySchema: VbenFormSchema[] = [
     component: 'Select',
     fieldName: 'status',
     label: '订阅状态',
-    componentProps: {"options": [{"label": "Active", "value": 1}, {"label": "Inactive", "value": 0}]},
+    componentProps: {
+      allowClear: true,
+      options: getDictOptions('llm_status'),
+    },
   },
 ];
 
@@ -95,6 +100,10 @@ export function useColumns(
       field: 'status',
       title: '状态',
       width: 80,
+      cellRender: {
+        name: 'CellTag',
+        options: getDictOptions('llm_status'),
+      },
     },
     {
       field: 'auto_renew',
@@ -183,7 +192,9 @@ export const formSchema: VbenFormSchema[] = [
     fieldName: 'status',
     label: '状态',
     rules: 'required',
-    componentProps: {"options": [{"label": "Active", "value": 1}, {"label": "Inactive", "value": 0}]},
+    componentProps: {
+      options: getDictOptions('llm_status'),
+    },
   },
   {
     component: 'Switch',
