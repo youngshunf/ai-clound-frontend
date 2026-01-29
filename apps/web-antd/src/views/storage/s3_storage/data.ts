@@ -65,6 +65,11 @@ export function useColumns(
       width: 120,
     },
     {
+      field: 'cdn_domain',
+      title: 'CDN域名',
+      minWidth: 180,
+    },
+    {
       field: 'remark',
       title: '备注',
       minWidth: 150,
@@ -139,6 +144,12 @@ export const formSchema: VbenFormSchema[] = [
     fieldName: 'region',
     label: '区域',
     componentProps: { placeholder: '可选，如: us-east-1' },
+  },
+  {
+    component: 'Input',
+    fieldName: 'cdn_domain',
+    label: 'CDN域名',
+    componentProps: { placeholder: '可选，如: https://cdn.example.com' },
   },
   {
     component: 'Textarea',

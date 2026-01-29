@@ -14,6 +14,7 @@ export interface S3Storage {
   bucket: string;
   prefix?: string;
   region?: string;
+  cdn_domain?: string;
   remark?: string;
   created_time: string;
   updated_time?: string;
@@ -36,6 +37,7 @@ export interface S3StorageCreateParams {
   bucket: string;
   prefix?: string;
   region?: string;
+  cdn_domain?: string;
   remark?: string;
 }
 
