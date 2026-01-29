@@ -398,3 +398,68 @@ export async function getLlmUsageLogsApi(params?: {
 export async function getLlmQuotaInfoApi() {
   return requestClient.get('/api/v1/llm/usage/quota');
 }
+
+// ==================== 模型别名映射 API ====================
+
+export interface LlmModelAliasResult {
+  id: number;
+  alias_name: string;
+  model_ids: number[];
+  display_name: string | null;
+  description: string | null;
+  enabled: boolean;
+}
+
+export interface LlmModelAliasDetailResult extends LlmModelAliasResult {
+  mapped_models: Array<{
+    id: number;
+    model_name: string;
+    display_name: string | null;
+    provider_name: string | null;
+  }>;
+}
+
+export interface LlmModelAliasParams {
+  alias_name?: string;
+  enabled?: boolean;
+  page?: number;
+  size?: number;
+}
+
+export interface LlmModelAliasCreateParams {
+  alias_name: string;
+  model_ids?: number[];
+  display_name?: string;
+  description?: string;
+  enabled?: boolean;
+}
+
+export async function getLlmModelAliasListApi(params?: LlmModelAliasParams) {
+  return requestClient.get<LlmModelAliasResult[]>('/api/v1/llm/model-alias', {
+    params,
+  });
+}
+
+export async function getLlmModelAliasApi(pk: number) {
+  return requestClient.get<LlmModelAliasDetailResult>(
+    `/api/v1/llm/model-alias/${pk}`,
+  );
+}
+
+export async function createLlmModelAliasApi(data: LlmModelAliasCreateParams) {
+  return requestClient.post<LlmModelAliasResult>(
+    '/api/v1/llm/model-alias',
+    data,
+  );
+}
+
+export async function updateLlmModelAliasApi(
+  pk: number,
+  data: Partial<LlmModelAliasCreateParams>,
+) {
+  return requestClient.put(`/api/v1/llm/model-alias/${pk}`, data);
+}
+
+export async function deleteLlmModelAliasApi(pk: number) {
+  return requestClient.delete(`/api/v1/llm/model-alias/${pk}`);
+}

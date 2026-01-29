@@ -29,6 +29,15 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
+        name: 'LlmModelAlias',
+        path: '/llm/model-alias',
+        component: () => import('#/views/llm/model-alias/index.vue'),
+        meta: {
+          title: '模型映射',
+          icon: 'carbon:connect',
+        },
+      },
+      {
         name: 'LlmModelGroup',
         path: '/llm/model-group',
         component: () => import('#/views/llm/model-group/index.vue'),

@@ -4,7 +4,7 @@ import type {
   OnActionClickParams,
   VxeTableGridOptions,
 } from '#/adapter/vxe-table';
-import type { UserSubscription, UserSubscriptionParams } from '#/api/llm/user_subscription';
+import type { SubscriptionTier, SubscriptionTierParams } from '#/api/user_tier/subscription_tier';
 
 import { ref } from 'vue';
 
@@ -17,15 +17,15 @@ import { message } from 'ant-design-vue';
 import { useVbenForm } from '#/adapter/form';
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import {
-  getUserSubscriptionListApi,
-  createUserSubscriptionApi,
-  updateUserSubscriptionApi,
-  deleteUserSubscriptionApi,
-} from '#/api/llm/user_subscription';
+  getSubscriptionTierListApi,
+  createSubscriptionTierApi,
+  updateSubscriptionTierApi,
+  deleteSubscriptionTierApi,
+} from '#/api/user_tier/subscription_tier';
 import { querySchema, useColumns, formSchema } from './data';
 
 defineOptions({
-  name: 'UserSubscription',
+  name: 'SubscriptionTier',
 });
 
 /**
@@ -40,7 +40,7 @@ const formOptions: VbenFormProps = {
   schema: querySchema,
 };
 
-const gridOptions: VxeTableGridOptions<UserSubscription> = {
+const gridOptions: VxeTableGridOptions<SubscriptionTier> = {
   rowConfig: {
     keyField: 'id',
   },
@@ -64,7 +64,7 @@ const gridOptions: VxeTableGridOptions<UserSubscription> = {
   proxyConfig: {
     ajax: {
       query: async ({ page }, formValues) => {
-        return await getUserSubscriptionListApi({
+        return await getSubscriptionTierListApi({
           page: page.currentPage,
           size: page.pageSize,
           ...formValues,
@@ -80,10 +80,10 @@ function onRefresh() {
   gridApi.query();
 }
 
-function onActionClick({ code, row }: OnActionClickParams<UserSubscription>) {
+function onActionClick({ code, row }: OnActionClickParams<SubscriptionTier>) {
   switch (code) {
     case 'delete': {
-      deleteUserSubscriptionApi(row.id).then(() => {
+      deleteSubscriptionTierApi(row.id).then(() => {
         message.success($t('ui.actionMessage.deleteSuccess', [row.id]));
         onRefresh();
       });
@@ -113,9 +113,9 @@ const [editModal, editModalApi] = useVbenModal({
     const { valid } = await editFormApi.validate();
     if (valid) {
       editModalApi.lock();
-      const data = await editFormApi.getValues<UserSubscriptionParams>();
+      const data = await editFormApi.getValues<SubscriptionTierParams>();
       try {
-        await updateUserSubscriptionApi(editId.value, data);
+        await updateSubscriptionTierApi(editId.value, data);
         message.success($t('ui.actionMessage.operationSuccess'));
         await editModalApi.close();
         onRefresh();
@@ -126,7 +126,7 @@ const [editModal, editModalApi] = useVbenModal({
   },
   onOpenChange(isOpen: boolean) {
     if (isOpen) {
-      const data = editModalApi.getData<UserSubscription>();
+      const data = editModalApi.getData<SubscriptionTier>();
       editFormApi.resetForm();
       if (data) {
         editFormApi.setValues(data);
@@ -149,9 +149,9 @@ const [addModal, addModalApi] = useVbenModal({
     const { valid } = await addFormApi.validate();
     if (valid) {
       addModalApi.lock();
-      const data = await addFormApi.getValues<UserSubscriptionParams>();
+      const data = await addFormApi.getValues<SubscriptionTierParams>();
       try {
-        await createUserSubscriptionApi(data);
+        await createSubscriptionTierApi(data);
         message.success($t('ui.actionMessage.operationSuccess'));
         await addModalApi.close();
         onRefresh();

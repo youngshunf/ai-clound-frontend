@@ -3,7 +3,7 @@ import type {
   OnActionClickFn,
   VxeGridProps,
 } from '#/adapter/vxe-table';
-import type { UserSubscription } from '#/api/llm/user_subscription';
+import type { UserSubscription } from '#/api/user_tier/user_subscription';
 
 import { $t } from '@vben/locales';
 
@@ -37,7 +37,7 @@ export const querySchema: VbenFormSchema[] = [
     label: '订阅状态',
     componentProps: {
       allowClear: true,
-      options: getDictOptions('llm_status'),
+      options: getDictOptions('user_tier_status'),
     },
   },
 ];
@@ -64,7 +64,7 @@ export function useColumns(
     {
       field: 'tier',
       title: '订阅等级',
-      width: 100,
+      width: 150,
     },
     {
       field: 'monthly_credits',
@@ -98,11 +98,11 @@ export function useColumns(
     },
     {
       field: 'status',
-      title: '状态',
-      width: 80,
+      title: '订阅状态',
+      width: 150,
       cellRender: {
         name: 'CellTag',
-        options: getDictOptions('llm_status'),
+        options: getDictOptions('user_tier_status'),
       },
     },
     {
@@ -190,10 +190,10 @@ export const formSchema: VbenFormSchema[] = [
   {
     component: 'Select',
     fieldName: 'status',
-    label: '状态',
+    label: '订阅状态',
     rules: 'required',
     componentProps: {
-      options: getDictOptions('llm_status'),
+      options: getDictOptions('user_tier_status'),
     },
   },
   {

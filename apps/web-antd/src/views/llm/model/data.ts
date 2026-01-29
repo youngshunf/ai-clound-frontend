@@ -55,6 +55,7 @@ export function useColumns(
     { field: 'seq', title: '#', type: 'seq', width: 50 },
     { field: 'model_name', title: '模型名称', width: 180 },
     { field: 'display_name', title: '显示名称', width: 150 },
+    { field: 'description', title: '描述', width: 150 },
     { field: 'provider_name', title: '供应商', width: 100 },
     {
       field: 'model_type',
@@ -152,6 +153,15 @@ export function useFormSchema(): VbenFormSchema[] {
       label: '显示名称',
       componentProps: {
         placeholder: 'GPT-4o',
+      },
+    },
+     
+    {
+      component: 'Textarea',
+      fieldName: 'description',
+      label: '描述',
+      componentProps: {
+        placeholder: '模型描述',
       },
     },
     {
