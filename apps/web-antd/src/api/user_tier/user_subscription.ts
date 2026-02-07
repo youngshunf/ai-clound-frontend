@@ -7,13 +7,19 @@ import { requestClient } from '#/api/request';
 // Types
 export interface UserSubscription {
   user_id: number;
+  user_nickname?: string;
+  user_phone?: string;
   tier: string;
+  subscription_type: string;
   monthly_credits: number;
   current_credits: number;
   used_credits: number;
   purchased_credits: number;
   billing_cycle_start: string;
   billing_cycle_end: string;
+  subscription_start_date: string | null;
+  subscription_end_date: string | null;
+  next_grant_date: string | null;
   status: string;
   auto_renew: boolean;
 }
@@ -21,7 +27,7 @@ export interface UserSubscription {
 export interface UserSubscriptionParams {
   page?: number;
   size?: number;
-  user_id?: number;
+  user_keyword?: string;
   billing_cycle_start?: string;
   billing_cycle_end?: string;
   status?: string;
@@ -30,12 +36,16 @@ export interface UserSubscriptionParams {
 export interface UserSubscriptionCreateParams {
   user_id: number;
   tier: string;
+  subscription_type?: string;
   monthly_credits: number;
   current_credits: number;
   used_credits: number;
   purchased_credits: number;
   billing_cycle_start: string;
   billing_cycle_end: string;
+  subscription_start_date?: string | null;
+  subscription_end_date?: string | null;
+  next_grant_date?: string | null;
   status: string;
   auto_renew: boolean;
 }

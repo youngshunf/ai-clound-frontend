@@ -46,6 +46,19 @@ export const querySchema: VbenFormSchema[] = [
     fieldName: 'enabled',
     label: '状态',
   },
+  {
+    component: 'Select',
+    componentProps: {
+      allowClear: true,
+      options: [
+        { label: '可见', value: true },
+        { label: '隐藏', value: false },
+      ],
+      placeholder: $t('common.form.select'),
+    },
+    fieldName: 'visible',
+    label: '可见性',
+  },
 ];
 
 export function useColumns(
@@ -100,6 +113,26 @@ export function useColumns(
         attrs: {
           beforeChange: async (newVal: boolean, row: LlmModelConfigResult) => {
             await updateLlmModelApi(row.id, { enabled: newVal });
+            return true;
+          },
+        },
+      },
+    },
+    {
+      field: 'visible',
+      title: '可见性',
+      width: 100,
+      cellRender: {
+        name: 'CellSwitch',
+        props: {
+          checkedValue: true,
+          unCheckedValue: false,
+          checkedChildren: '可见',
+          unCheckedChildren: '隐藏',
+        },
+        attrs: {
+          beforeChange: async (newVal: boolean, row: LlmModelConfigResult) => {
+            await updateLlmModelApi(row.id, { visible: newVal });
             return true;
           },
         },
@@ -232,6 +265,12 @@ export function useFormSchema(): VbenFormSchema[] {
       component: 'Switch',
       fieldName: 'enabled',
       label: '启用',
+      defaultValue: true,
+    },
+    {
+      component: 'Switch',
+      fieldName: 'visible',
+      label: '用户可见',
       defaultValue: true,
     },
   ];

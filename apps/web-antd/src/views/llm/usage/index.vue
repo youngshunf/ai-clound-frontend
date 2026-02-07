@@ -58,7 +58,7 @@ const formOptions: VbenFormProps = {
 
 const gridOptions: VxeTableGridOptions<LlmUsageLogResult> = {
   rowConfig: { keyField: 'id' },
-  height: 400,
+  height: 800,
   exportConfig: {},
   toolbarConfig: {
     export: true,

@@ -4,7 +4,7 @@ import type {
   OnActionClickParams,
   VxeTableGridOptions,
 } from '#/adapter/vxe-table';
-import type { ModelCreditRate, ModelCreditRateParams } from '#/api/user_tier/model_credit_rate';
+import type { ModelCreditRate, ModelCreditRateCreateParams } from '#/api/user_tier/model_credit_rate';
 
 import { ref } from 'vue';
 
@@ -84,7 +84,7 @@ function onActionClick({ code, row }: OnActionClickParams<ModelCreditRate>) {
   switch (code) {
     case 'delete': {
       deleteModelCreditRateApi(row.id).then(() => {
-        message.success($t('ui.actionMessage.deleteSuccess', [row.id]));
+        message.success($t('ui.actionMessage.deleteSuccess', [row.model_name || row.id]));
         onRefresh();
       });
       break;
@@ -113,7 +113,7 @@ const [editModal, editModalApi] = useVbenModal({
     const { valid } = await editFormApi.validate();
     if (valid) {
       editModalApi.lock();
-      const data = await editFormApi.getValues<ModelCreditRateParams>();
+      const data = await editFormApi.getValues<ModelCreditRateCreateParams>();
       try {
         await updateModelCreditRateApi(editId.value, data);
         message.success($t('ui.actionMessage.operationSuccess'));
@@ -149,7 +149,7 @@ const [addModal, addModalApi] = useVbenModal({
     const { valid } = await addFormApi.validate();
     if (valid) {
       addModalApi.lock();
-      const data = await addFormApi.getValues<ModelCreditRateParams>();
+      const data = await addFormApi.getValues<ModelCreditRateCreateParams>();
       try {
         await createModelCreditRateApi(data);
         message.success($t('ui.actionMessage.operationSuccess'));

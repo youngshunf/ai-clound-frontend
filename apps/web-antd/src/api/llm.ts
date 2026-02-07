@@ -63,6 +63,7 @@ export interface LlmModelConfigResult {
   tpm_limit: number | null;
   priority: number;
   enabled: boolean;
+  visible: boolean;
 }
 
 export interface LlmModelConfigParams {
@@ -70,6 +71,7 @@ export interface LlmModelConfigParams {
   model_type?: string;
   model_name?: string;
   enabled?: boolean;
+  visible?: boolean;
   page?: number;
   size?: number;
 }
@@ -90,6 +92,7 @@ export interface LlmModelConfigCreateParams {
   tpm_limit?: number;
   priority?: number;
   enabled?: boolean;
+  visible?: boolean;
 }
 
 // 模型组
@@ -211,6 +214,9 @@ export interface LlmDailyUsage {
 
 export interface LlmUsageLogResult {
   id: number;
+  user_id: number;
+  user_nickname: string | null;
+  user_phone: string | null;
   model_name: string;
   input_tokens: number;
   output_tokens: number;
@@ -387,6 +393,7 @@ export async function getLlmUsageLogsApi(params?: {
   status?: string;
   start_date?: string;
   end_date?: string;
+  user_keyword?: string;
   page?: number;
   size?: number;
 }) {

@@ -14,10 +14,10 @@ import { getDictOptions } from '#/utils/dict';
  */
 export const querySchema: VbenFormSchema[] = [
   {
-    component: 'InputNumber',
-    fieldName: 'user_id',
-    label: '用户 ID',
-    componentProps: {"style": "width: 100%"},
+    component: 'Input',
+    fieldName: 'user_keyword',
+    label: '用户搜索',
+    componentProps: {"placeholder": "昵称/手机号"},
   },
   {
     component: 'Select',
@@ -72,9 +72,14 @@ export function useColumns(
       width: 50,
     },
     {
-      field: 'user_id',
-      title: '用户 ID',
-      width: 150,
+      field: 'user_nickname',
+      title: '用户昵称',
+      width: 120,
+    },
+    {
+      field: 'user_phone',
+      title: '手机号',
+      width: 130,
     },
     {
       field: 'credit_type',

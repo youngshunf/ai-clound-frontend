@@ -57,7 +57,18 @@ export function useColumns(
     {
       field: 'monthly_price',
       title: '月费',
-      width: 150,
+      width: 120,
+    },
+    {
+      field: 'yearly_price',
+      title: '年费',
+      width: 120,
+    },
+    {
+      field: 'yearly_discount',
+      title: '年费折扣',
+      width: 100,
+      formatter: ({ cellValue }) => cellValue ? `${(cellValue * 100).toFixed(0)}%` : '-',
     },
     {
       field: 'enabled',
@@ -116,6 +127,18 @@ export const formSchema: VbenFormSchema[] = [
     label: '月费',
     rules: 'required',
     componentProps: {"style": "width: 100%"},
+  },
+  {
+    component: 'InputNumber',
+    fieldName: 'yearly_price',
+    label: '年费',
+    componentProps: {"style": "width: 100%", "placeholder": "留空则不支持年费订阅"},
+  },
+  {
+    component: 'InputNumber',
+    fieldName: 'yearly_discount',
+    label: '年费折扣',
+    componentProps: {"style": "width: 100%", "placeholder": "如 0.8 表示8折", "min": 0, "max": 1, "step": 0.05},
   },
   {
     component: 'Textarea',

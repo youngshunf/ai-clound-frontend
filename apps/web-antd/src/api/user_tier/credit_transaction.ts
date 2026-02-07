@@ -7,6 +7,8 @@ import { requestClient } from '#/api/request';
 // Types
 export interface CreditTransaction {
   user_id: number;
+  user_nickname?: string;
+  user_phone?: string;
   transaction_type: string;
   credits: number;
   balance_before: number;
@@ -20,7 +22,7 @@ export interface CreditTransaction {
 export interface CreditTransactionParams {
   page?: number;
   size?: number;
-  user_id?: number;
+  user_keyword?: string;
   transaction_type?: string;
   reference_id?: string;
   reference_type?: string;

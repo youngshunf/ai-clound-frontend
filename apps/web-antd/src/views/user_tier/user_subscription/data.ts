@@ -14,10 +14,10 @@ import { getDictOptions } from '#/utils/dict';
  */
 export const querySchema: VbenFormSchema[] = [
   {
-    component: 'InputNumber',
-    fieldName: 'user_id',
-    label: '用户 ID',
-    componentProps: {"style": "width: 100%"},
+    component: 'Input',
+    fieldName: 'user_keyword',
+    label: '用户搜索',
+    componentProps: {"placeholder": "昵称/手机号"},
   },
   {
     component: 'RangePicker',
@@ -57,14 +57,25 @@ export function useColumns(
       width: 50,
     },
     {
-      field: 'user_id',
-      title: '用户 ID',
-      width: 150,
+      field: 'user_nickname',
+      title: '用户昵称',
+      width: 120,
+    },
+    {
+      field: 'user_phone',
+      title: '手机号',
+      width: 130,
     },
     {
       field: 'tier',
       title: '订阅等级',
-      width: 150,
+      width: 120,
+    },
+    {
+      field: 'subscription_type',
+      title: '订阅类型',
+      width: 100,
+      formatter: ({ cellValue }) => cellValue === 'yearly' ? '年度' : '月度',
     },
     {
       field: 'monthly_credits',
@@ -106,9 +117,24 @@ export function useColumns(
       },
     },
     {
+      field: 'subscription_start_date',
+      title: '订阅开始时间',
+      width: 150,
+    },
+    {
+      field: 'subscription_end_date',
+      title: '订阅结束时间',
+      width: 150,
+    },
+    {
+      field: 'next_grant_date',
+      title: '下次赠送时间',
+      width: 150,
+    },
+    {
       field: 'auto_renew',
       title: '是否自动续费',
-      width: 150,
+      width: 120,
     },
     {
       field: 'operation',
@@ -144,6 +170,18 @@ export const formSchema: VbenFormSchema[] = [
     fieldName: 'tier',
     label: '订阅等级',
     rules: 'required',
+  },
+  {
+    component: 'Select',
+    fieldName: 'subscription_type',
+    label: '订阅类型',
+    defaultValue: 'monthly',
+    componentProps: {
+      options: [
+        { label: '月度', value: 'monthly' },
+        { label: '年度', value: 'yearly' },
+      ],
+    },
   },
   {
     component: 'InputNumber',
@@ -195,6 +233,24 @@ export const formSchema: VbenFormSchema[] = [
     componentProps: {
       options: getDictOptions('user_tier_status'),
     },
+  },
+  {
+    component: 'DatePicker',
+    fieldName: 'subscription_start_date',
+    label: '订阅开始时间',
+    componentProps: {"format": "YYYY-MM-DD HH:mm:ss", "showTime": true, "valueFormat": "YYYY-MM-DD HH:mm:ss"},
+  },
+  {
+    component: 'DatePicker',
+    fieldName: 'subscription_end_date',
+    label: '订阅结束时间',
+    componentProps: {"format": "YYYY-MM-DD HH:mm:ss", "showTime": true, "valueFormat": "YYYY-MM-DD HH:mm:ss"},
+  },
+  {
+    component: 'DatePicker',
+    fieldName: 'next_grant_date',
+    label: '下次赠送时间',
+    componentProps: {"format": "YYYY-MM-DD HH:mm:ss", "showTime": true, "valueFormat": "YYYY-MM-DD HH:mm:ss", "placeholder": "年度订阅专用"},
   },
   {
     component: 'Switch',

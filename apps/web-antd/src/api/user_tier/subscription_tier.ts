@@ -10,6 +10,8 @@ export interface SubscriptionTier {
   display_name: string;
   monthly_credits: number;
   monthly_price: number;
+  yearly_price: number | null;
+  yearly_discount: number | null;
   features: Record<string, any>;
   enabled: boolean;
   sort_order: number;
@@ -27,6 +29,8 @@ export interface SubscriptionTierCreateParams {
   display_name: string;
   monthly_credits: number;
   monthly_price: number;
+  yearly_price?: number | null;
+  yearly_discount?: number | null;
   features: Record<string, any>;
   enabled: boolean;
   sort_order: number;

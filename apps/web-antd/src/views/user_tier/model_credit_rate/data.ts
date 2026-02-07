@@ -7,15 +7,19 @@ import type { ModelCreditRate } from '#/api/user_tier/model_credit_rate';
 
 import { $t } from '@vben/locales';
 
+import { updateModelCreditRateApi } from '#/api/user_tier/model_credit_rate';
+
 /**
  * Query form schema
  */
 export const querySchema: VbenFormSchema[] = [
   {
-    component: 'InputNumber',
+    component: 'ModelSelect',
     fieldName: 'model_id',
-    label: '模型 ID',
-    componentProps: {"style": "width: 100%"},
+    label: '模型',
+    componentProps: {
+      placeholder: '选择模型进行筛选',
+    },
   },
 ];
 
@@ -34,9 +38,14 @@ export function useColumns(
       width: 50,
     },
     {
-      field: 'model_id',
-      title: '模型 ID',
-      width: 150,
+      field: 'model_name',
+      title: '模型',
+      minWidth: 250,
+      formatter({ row }) {
+        const name = row.model_name || `ID: ${row.model_id}`;
+        const provider = row.provider_name ? `（${row.provider_name}）` : '';
+        return `${name}${provider}`;
+      },
     },
     {
       field: 'base_credit_per_1k_tokens',
@@ -56,7 +65,22 @@ export function useColumns(
     {
       field: 'enabled',
       title: '是否启用',
-      width: 150,
+      width: 100,
+      cellRender: {
+        name: 'CellSwitch',
+        props: {
+          checkedValue: true,
+          unCheckedValue: false,
+          checkedChildren: '启用',
+          unCheckedChildren: '禁用',
+        },
+        attrs: {
+          beforeChange: async (newVal: boolean, row: ModelCreditRate) => {
+            await updateModelCreditRateApi(row.id, { enabled: newVal });
+            return true;
+          },
+        },
+      },
     },
     {
       field: 'operation',
@@ -66,7 +90,7 @@ export function useColumns(
       width: 150,
       cellRender: {
         attrs: {
-          nameField: 'id',
+          nameField: 'model_name',
           onClick: onActionClick,
         },
         name: 'CellOperation',
@@ -81,11 +105,13 @@ export function useColumns(
  */
 export const formSchema: VbenFormSchema[] = [
   {
-    component: 'InputNumber',
+    component: 'ModelSelect',
     fieldName: 'model_id',
-    label: '模型 ID',
-    rules: 'required',
-    componentProps: {"style": "width: 100%"},
+    label: '模型',
+    rules: 'selectRequired',
+    componentProps: {
+      placeholder: '选择模型',
+    },
   },
   {
     component: 'InputNumber',

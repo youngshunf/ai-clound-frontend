@@ -6,7 +6,10 @@ import { requestClient } from '#/api/request';
 
 // Types
 export interface ModelCreditRate {
+  id: number;
   model_id: number;
+  model_name?: string;
+  provider_name?: string;
   base_credit_per_1k_tokens: number;
   input_multiplier: number;
   output_multiplier: number;

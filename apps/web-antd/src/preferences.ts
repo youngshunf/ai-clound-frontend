@@ -9,14 +9,14 @@ export const overridesPreferences = defineOverridesPreferences({
   // overrides
   app: {
     accessMode: 'backend',
-    name: import.meta.env.VITE_APP_TITLE,
+    name: import.meta.env.VITE_APP_TITLE || '智小芽',
     enableRefreshToken: true,
   },
   footer: {
     enable: false,
   },
   logo: {
-    source: 'https://wu-clan.github.io/picx-images-hosting/logo/fba.png',
+    source: '/logo-horizontal.svg',
   },
   theme: {
     mode: 'auto',

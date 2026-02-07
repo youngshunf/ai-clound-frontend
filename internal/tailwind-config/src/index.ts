@@ -75,6 +75,13 @@ const shadcnUiColors = {
 };
 
 const customColors = {
+  // 智小芽品牌色 - 科技渐变
+  brand: {
+    cyan: '#06B6D4',     // 科技青
+    blue: '#3B82F6',     // 智慧蓝
+    violet: '#8B5CF6',   // 创新紫
+    'deep-blue': '#1E3A5F', // 深蓝底
+  },
   green: {
     ...createColorsPalette('green'),
     foreground: 'hsl(var(--success-foreground))',
@@ -157,10 +164,17 @@ export default {
         sm: 'calc(var(--radius) - 4px)',
         xl: 'calc(var(--radius) + 4px)',
       },
+      backgroundImage: {
+        'gradient-brand': 'linear-gradient(90deg, #06B6D4 0%, #3B82F6 50%, #8B5CF6 100%)',
+        'gradient-primary': 'linear-gradient(135deg, #06B6D4 0%, #8B5CF6 100%)',
+        'gradient-vertical': 'linear-gradient(180deg, #06B6D4 0%, #3B82F6 50%, #8B5CF6 100%)',
+      },
       boxShadow: {
         float: `0 6px 16px 0 rgb(0 0 0 / 8%),
           0 3px 6px -4px rgb(0 0 0 / 12%),
           0 9px 28px 8px rgb(0 0 0 / 5%)`,
+        'glow': '0 0 20px rgba(6, 182, 212, 0.3), 0 0 40px rgba(139, 92, 246, 0.2)',
+        'glow-blue': '0 0 20px rgba(59, 130, 246, 0.4)',
       },
       colors: {
         ...customColors,

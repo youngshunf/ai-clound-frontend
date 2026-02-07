@@ -1,1 +1,40 @@
 @use '@vben-core/design/bem' as *;
+
+/* 智小芽品牌色彩系统 */
+:root {
+  /* 品牌色 - 科技渐变 */
+  --color-brand-cyan: #06B6D4;
+  --color-brand-blue: #3B82F6;
+  --color-brand-violet: #8B5CF6;
+  --color-brand-deep-blue: #1E3A5F;
+  
+  /* 渐变 */
+  --gradient-brand: linear-gradient(90deg, #06B6D4 0%, #3B82F6 50%, #8B5CF6 100%);
+  --gradient-primary: linear-gradient(135deg, #06B6D4 0%, #8B5CF6 100%);
+  
+  /* 中性色 */
+  --color-slate-900: #0F172A;
+  --color-slate-800: #1E293B;
+  --color-slate-50: #F8FAFC;
+  --color-white: #FFFFFF;
+  
+  /* 字体系统 */
+  --font-cn: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  --font-en: 'Inter', 'SF Pro Display', 'Helvetica Neue', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+}
+
+/* 品牌渐变文字工具类 */
+.text-gradient-brand {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-primary {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

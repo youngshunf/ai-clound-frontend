@@ -16,6 +16,14 @@ export const LOG_STATUS = [
 export const querySchema: VbenFormSchema[] = [
   {
     component: 'Input',
+    fieldName: 'user_keyword',
+    label: '用户搜索',
+    componentProps: {
+      placeholder: '昵称/手机号',
+    },
+  },
+  {
+    component: 'Input',
     fieldName: 'model_name',
     label: '模型名称',
   },
@@ -43,6 +51,8 @@ export const querySchema: VbenFormSchema[] = [
 export function useLogColumns(): VxeGridProps['columns'] {
   return [
     { field: 'seq', title: '#', type: 'seq', width: 50 },
+    { field: 'user_nickname', title: '用户昵称', width: 120 },
+    { field: 'user_phone', title: '手机号', width: 120 },
     { field: 'model_name', title: '模型', width: 150 },
     { field: 'input_tokens', title: '输入 Tokens', width: 100 },
     { field: 'output_tokens', title: '输出 Tokens', width: 100 },
@@ -52,7 +62,8 @@ export function useLogColumns(): VxeGridProps['columns'] {
       title: '费用',
       width: 80,
       formatter({ cellValue }) {
-        return `$${cellValue?.toFixed(4) || 0}`;
+        const num = Number(cellValue) || 0;
+        return `$${num.toFixed(4)}`;
       },
     },
     {

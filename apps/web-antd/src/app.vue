@@ -25,7 +25,15 @@ const tokenTheme = computed(() => {
 
   return {
     algorithm,
-    token: tokens,
+    token: {
+      ...tokens,
+      // 智小芽品牌色覆盖
+      colorPrimary: '#3B82F6', // 智慧蓝
+      colorInfo: '#3B82F6',
+      colorLink: '#06B6D4',    // 科技青
+      borderRadius: 8,
+      fontFamily: "'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif",
+    },
   };
 });
 </script>

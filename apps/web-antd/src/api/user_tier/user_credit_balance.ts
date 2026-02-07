@@ -7,6 +7,8 @@ import { requestClient } from '#/api/request';
 // Types
 export interface UserCreditBalance {
   user_id: number;
+  user_nickname?: string;
+  user_phone?: string;
   credit_type: string;
   original_amount: number;
   used_amount: number;
@@ -21,7 +23,7 @@ export interface UserCreditBalance {
 export interface UserCreditBalanceParams {
   page?: number;
   size?: number;
-  user_id?: number;
+  user_keyword?: string;
   credit_type?: string;
   expires_at?: string;
   granted_at?: string;
