@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <linearGradient id="gradFav" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06B6D4"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="gradFav2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#06B6D4"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+  </defs>
+  
+  <g transform="translate(16, 17.5)">
+    <!-- Base circle - dark -->
+    <circle cx="0" cy="0" r="8.75" fill="#0F172A"/>
+    
+    <!-- Left leaf -->
+    <path d="M-1.125 -0.3125 Q-5.625 -2.8125 -6.25 -9.875 Q-4.25 -5.3125 -2.1875 -1.75 Q-1.5 -0.3125 -1.125 -0.3125" fill="url(#gradFav)"/>
+    
+    <!-- Right leaf -->
+    <path d="M1.125 -0.3125 Q5.625 -2.8125 6.25 -9.875 Q4.25 -5.3125 2.1875 -1.75 Q1.5 -0.3125 1.125 -0.3125" fill="url(#gradFav2)"/>
+    
+    <!-- Bottom glow dot -->
+    <circle cx="0" cy="3.4375" r="1.375" fill="url(#gradFav)"/>
+  </g>
+</svg>

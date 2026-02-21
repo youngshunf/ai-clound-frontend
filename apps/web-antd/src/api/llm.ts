@@ -59,6 +59,8 @@ export interface LlmModelConfigResult {
   supports_vision: boolean;
   input_cost_per_1k: number;
   output_cost_per_1k: number;
+  cost_per_generation: number | null;
+  cost_per_second: number | null;
   rpm_limit: number | null;
   tpm_limit: number | null;
   priority: number;
@@ -88,6 +90,8 @@ export interface LlmModelConfigCreateParams {
   supports_vision?: boolean;
   input_cost_per_1k?: number;
   output_cost_per_1k?: number;
+  cost_per_generation?: number;
+  cost_per_second?: number;
   rpm_limit?: number;
   tpm_limit?: number;
   priority?: number;
@@ -283,7 +287,9 @@ export async function deleteLlmModelApi(pk: number) {
 }
 
 export async function getAvailableModelsApi() {
-  return requestClient.get<LlmModelConfigResult[]>('/api/v1/llm/models/available');
+  return requestClient.get<LlmModelConfigResult[]>(
+    '/api/v1/llm/models/available',
+  );
 }
 
 // ==================== 模型组 API ====================
@@ -469,4 +475,56 @@ export async function updateLlmModelAliasApi(
 
 export async function deleteLlmModelAliasApi(pk: number) {
   return requestClient.delete(`/api/v1/llm/model-alias/${pk}`);
+}
+
+// ==================== 媒体任务 API ====================
+
+export interface LlmMediaTaskResult {
+  id: number;
+  task_id: string;
+  user_id: number;
+  api_key_id: number;
+  model_name: string;
+  provider_id: number;
+  media_type: string;
+  prompt: string;
+  status: string;
+  progress: number;
+  params: Record<string, any> | null;
+  vendor_task_id: string | null;
+  vendor_urls: string[] | null;
+  oss_urls: string[] | null;
+  error_code: string | null;
+  error_message: string | null;
+  webhook_url: string | null;
+  credits_cost: number;
+  credits_pre_deducted: number;
+  poll_count: number;
+  ip_address: string | null;
+  completed_at: string | null;
+  created_time: string;
+  updated_time: string | null;
+}
+
+export interface LlmMediaTaskParams {
+  user_id?: number;
+  media_type?: string;
+  status?: string;
+  model_name?: string;
+  page?: number;
+  size?: number;
+}
+
+export async function getLlmMediaTaskListApi(params?: LlmMediaTaskParams) {
+  return requestClient.get<LlmMediaTaskResult[]>('/api/v1/llm/media-tasks', {
+    params,
+  });
+}
+
+export async function getLlmMediaTaskApi(pk: number) {
+  return requestClient.get<LlmMediaTaskResult>(`/api/v1/llm/media-tasks/${pk}`);
+}
+
+export async function deleteLlmMediaTaskApi(pk: number) {
+  return requestClient.delete(`/api/v1/llm/media-tasks/${pk}`);
 }

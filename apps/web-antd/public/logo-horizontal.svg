@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 56" width="200" height="56">
+  <defs>
+    <linearGradient id="gradHL" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06B6D4"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="gradHL2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#06B6D4"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+  </defs>
+  
+  <g transform="translate(28, 28)">
+    <circle cx="0" cy="0" r="18" fill="#E2E8F0"/>
+    <path d="M-2.3 -0.65 Q-11.6 -5.8 -12.9 -20.4 Q-8.8 -11 -4.5 -3.6 Q-3.1 -0.65 -2.3 -0.65" fill="url(#gradHL)"/>
+    <path d="M2.3 -0.65 Q11.6 -5.8 12.9 -20.4 Q8.8 -11 4.5 -3.6 Q3.1 -0.65 2.3 -0.65" fill="url(#gradHL2)"/>
+    <circle cx="0" cy="7.1" r="2.8" fill="url(#gradHL)"/>
+  </g>
+  
+  <text x="62" y="38" font-family="'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif" font-size="24" font-weight="600" fill="#0F172A">智小芽</text>
+</svg>

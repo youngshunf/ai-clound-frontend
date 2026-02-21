@@ -4,9 +4,7 @@
  */
 import type { VbenFormSchema } from '#/adapter/form';
 import type { OnActionClickFn, VxeGridProps } from '#/adapter/vxe-table';
-import type { LlmModelGroupResult, LlmModelConfigResult } from '#/api';
-
-import type { Ref } from 'vue';
+import type { LlmModelGroupResult } from '#/api';
 
 import { $t } from '@vben/locales';
 
@@ -129,9 +127,7 @@ export function useColumns(
   ];
 }
 
-export function useFormSchema(
-  modelOptions: Ref<LlmModelConfigResult[]>,
-): VbenFormSchema[] {
+export function useFormSchema(): VbenFormSchema[] {
   return [
     {
       component: 'Input',
@@ -151,14 +147,11 @@ export function useFormSchema(
       defaultValue: 'TEXT',
     },
     {
-      component: 'Select',
+      component: 'ModelSelect',
       fieldName: 'model_ids',
       label: '关联模型',
       componentProps: {
         mode: 'multiple',
-        options: modelOptions,
-        fieldNames: { label: 'model_name', value: 'id' },
-        class: 'w-full',
         placeholder: '选择关联的模型',
       },
     },

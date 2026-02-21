@@ -1,48 +1,62 @@
-<!--
-  模型组管理页面
-  @author Ysf
--->
 <script setup lang="ts">
 import type { VbenFormProps } from '@vben/common-ui';
 import type {
-  VxeTableGridOptions,
   OnActionClickParams,
+  VxeTableGridOptions,
 } from '#/adapter/vxe-table';
-import type {
-  LlmModelGroupResult,
-  LlmModelGroupCreateParams,
-} from '#/api';
+import type { AppVersion, AppVersionParams } from '#/api/admin/app_version';
 
 import { ref } from 'vue';
+
 import { Page, useVbenModal, VbenButton } from '@vben/common-ui';
 import { MaterialSymbolsAdd } from '@vben/icons';
 import { $t } from '@vben/locales';
+
 import { message } from 'ant-design-vue';
 
 import { useVbenForm } from '#/adapter/form';
 import { useVbenVxeGrid } from '#/adapter/vxe-table';
 import {
-  getLlmModelGroupListApi,
-  createLlmModelGroupApi,
-  updateLlmModelGroupApi,
-  deleteLlmModelGroupApi,
-} from '#/api';
-import { querySchema, useColumns, useFormSchema } from './data';
+  getAppVersionListApi,
+  createAppVersionApi,
+  updateAppVersionApi,
+  deleteAppVersionApi,
+} from '#/api/admin/app_version';
+import { querySchema, useColumns, formSchema } from './data';
 
+defineOptions({
+  name: 'AppVersion',
+});
+
+/**
+ * Grid configuration
+ */
 const formOptions: VbenFormProps = {
   collapsed: true,
   showCollapseButton: true,
-  submitButtonOptions: { content: $t('common.form.query') },
+  submitButtonOptions: {
+    content: $t('common.form.query'),
+  },
   schema: querySchema,
 };
 
-const gridOptions: VxeTableGridOptions<LlmModelGroupResult> = {
-  rowConfig: { keyField: 'id' },
+const gridOptions: VxeTableGridOptions<AppVersion> = {
+  rowConfig: {
+    keyField: 'id',
+  },
+  checkboxConfig: {
+    highlight: true,
+  },
   height: 'auto',
   exportConfig: {},
+  printConfig: {},
   toolbarConfig: {
     export: true,
+    print: true,
     refresh: true,
+    refreshOptions: {
+      code: 'query',
+    },
     custom: true,
     zoom: true,
   },
@@ -50,7 +64,7 @@ const gridOptions: VxeTableGridOptions<LlmModelGroupResult> = {
   proxyConfig: {
     ajax: {
       query: async ({ page }, formValues) => {
-        return await getLlmModelGroupListApi({
+        return await getAppVersionListApi({
           page: page.currentPage,
           size: page.pageSize,
           ...formValues,
@@ -66,16 +80,11 @@ function onRefresh() {
   gridApi.query();
 }
 
-const editId = ref<number>(0);
-
-function onActionClick({
-  code,
-  row,
-}: OnActionClickParams<LlmModelGroupResult>) {
+function onActionClick({ code, row }: OnActionClickParams<AppVersion>) {
   switch (code) {
     case 'delete': {
-      deleteLlmModelGroupApi(row.id).then(() => {
-        message.success($t('ui.actionMessage.deleteSuccess', [row.name]));
+      deleteAppVersionApi(row.id).then(() => {
+        message.success($t('ui.actionMessage.deleteSuccess', [row.id]));
         onRefresh();
       });
       break;
@@ -88,9 +97,14 @@ function onActionClick({
   }
 }
 
+/**
+ * Edit Modal
+ */
+const editId = ref<number>(0);
+
 const [EditForm, editFormApi] = useVbenForm({
   showDefaultActions: false,
-  schema: useFormSchema(),
+  schema: formSchema,
 });
 
 const [editModal, editModalApi] = useVbenModal({
@@ -99,9 +113,9 @@ const [editModal, editModalApi] = useVbenModal({
     const { valid } = await editFormApi.validate();
     if (valid) {
       editModalApi.lock();
-      const data = await editFormApi.getValues<LlmModelGroupCreateParams>();
+      const data = await editFormApi.getValues<AppVersionParams>();
       try {
-        await updateLlmModelGroupApi(editId.value, data);
+        await updateAppVersionApi(editId.value, data);
         message.success($t('ui.actionMessage.operationSuccess'));
         await editModalApi.close();
         onRefresh();
@@ -110,9 +124,9 @@ const [editModal, editModalApi] = useVbenModal({
       }
     }
   },
-  onOpenChange(isOpen) {
+  onOpenChange(isOpen: boolean) {
     if (isOpen) {
-      const data = editModalApi.getData<LlmModelGroupResult>();
+      const data = editModalApi.getData<AppVersion>();
       editFormApi.resetForm();
       if (data) {
         editFormApi.setValues(data);
@@ -121,9 +135,12 @@ const [editModal, editModalApi] = useVbenModal({
   },
 });
 
+/**
+ * Add Modal
+ */
 const [AddForm, addFormApi] = useVbenForm({
   showDefaultActions: false,
-  schema: useFormSchema(),
+  schema: formSchema,
 });
 
 const [addModal, addModalApi] = useVbenModal({
@@ -132,9 +149,9 @@ const [addModal, addModalApi] = useVbenModal({
     const { valid } = await addFormApi.validate();
     if (valid) {
       addModalApi.lock();
-      const data = await addFormApi.getValues<LlmModelGroupCreateParams>();
+      const data = await addFormApi.getValues<AppVersionParams>();
       try {
-        await createLlmModelGroupApi(data);
+        await createAppVersionApi(data);
         message.success($t('ui.actionMessage.operationSuccess'));
         await addModalApi.close();
         onRefresh();
@@ -143,29 +160,28 @@ const [addModal, addModalApi] = useVbenModal({
       }
     }
   },
-  onOpenChange(isOpen) {
+  onOpenChange(isOpen: boolean) {
     if (isOpen) {
       addFormApi.resetForm();
     }
   },
 });
-
 </script>
 
 <template>
   <Page auto-content-height>
     <Grid>
       <template #toolbar-actions>
-        <VbenButton @click="() => addModalApi.open()">
+        <VbenButton @click="() => addModalApi.setData(null).open()">
           <MaterialSymbolsAdd class="size-5" />
-          添加模型组
+          添加
         </VbenButton>
       </template>
     </Grid>
-    <editModal title="编辑模型组">
+    <editModal :title="'编辑'" :fullscreen-button="false" class="w-[800px]">
       <EditForm />
     </editModal>
-    <addModal title="添加模型组">
+    <addModal :title="'添加'" :fullscreen-button="false" class="w-[800px]">
       <AddForm />
     </addModal>
   </Page>

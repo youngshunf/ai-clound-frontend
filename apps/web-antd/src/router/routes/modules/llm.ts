@@ -73,6 +73,15 @@ const routes: RouteRecordRaw[] = [
           icon: 'carbon:analytics',
         },
       },
+      {
+        name: 'LlmMediaTask',
+        path: '/llm/media-task',
+        component: () => import('#/views/llm/media-task/index.vue'),
+        meta: {
+          title: '媒体任务',
+          icon: 'carbon:media-library',
+        },
+      },
     ],
   },
 ];

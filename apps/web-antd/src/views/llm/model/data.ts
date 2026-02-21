@@ -97,6 +97,22 @@ export function useColumns(
         return `$${cellValue}`;
       },
     },
+    {
+      field: 'cost_per_generation',
+      title: '生成费用',
+      width: 90,
+      formatter({ cellValue }) {
+        return cellValue ? `$${cellValue}` : '-';
+      },
+    },
+    {
+      field: 'cost_per_second',
+      title: '秒费用',
+      width: 80,
+      formatter({ cellValue }) {
+        return cellValue ? `$${cellValue}` : '-';
+      },
+    },
     { field: 'priority', title: '优先级', width: 80 },
     {
       field: 'enabled',
@@ -188,7 +204,7 @@ export function useFormSchema(): VbenFormSchema[] {
         placeholder: 'GPT-4o',
       },
     },
-     
+
     {
       component: 'Textarea',
       fieldName: 'description',
@@ -235,6 +251,28 @@ export function useFormSchema(): VbenFormSchema[] {
       label: '输出成本/1K',
       componentProps: { min: 0, step: 0.0001, class: 'w-full' },
       defaultValue: 0,
+    },
+    {
+      component: 'InputNumber',
+      fieldName: 'cost_per_generation',
+      label: '生成费用',
+      componentProps: {
+        min: 0,
+        step: 0.0001,
+        class: 'w-full',
+        placeholder: '图像生成用',
+      },
+    },
+    {
+      component: 'InputNumber',
+      fieldName: 'cost_per_second',
+      label: '秒费用',
+      componentProps: {
+        min: 0,
+        step: 0.0001,
+        class: 'w-full',
+        placeholder: '视频按时长用',
+      },
     },
     {
       component: 'InputNumber',
