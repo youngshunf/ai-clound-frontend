@@ -7,7 +7,7 @@ import type { LlmModelConfigResult } from '#/api';
 
 import { computed, ref, watch } from 'vue';
 
-import { Select, Spin } from 'ant-design-vue';
+import { Select, Spin } from 'antdv-next';
 
 import { getLlmModelListApi } from '#/api';
 
