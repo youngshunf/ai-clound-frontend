@@ -14,6 +14,15 @@ import { getDictOptions } from '#/utils/dict';
  */
 export const querySchema: VbenFormSchema[] = [
   {
+    component: 'Select',
+    fieldName: 'app_code',
+    label: '应用',
+    componentProps: {
+      allowClear: true,
+      options: getDictOptions('sys_app_code'),
+    },
+  },
+  {
     component: 'Input',
     fieldName: 'user_keyword',
     label: '用户搜索',
@@ -58,6 +67,15 @@ export function useColumns(
       type: 'seq',
       fixed: 'left',
       width: 50,
+    },
+    {
+      field: 'app_code',
+      title: '应用',
+      width: 100,
+      cellRender: {
+        name: 'CellTag',
+        options: getDictOptions('sys_app_code'),
+      },
     },
     {
       field: 'user_nickname',

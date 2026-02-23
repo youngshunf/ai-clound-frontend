@@ -8,11 +8,21 @@ import type { ModelCreditRate } from '#/api/user_tier/model_credit_rate';
 import { $t } from '@vben/locales';
 
 import { updateModelCreditRateApi } from '#/api/user_tier/model_credit_rate';
+import { getDictOptions } from '#/utils/dict';
 
 /**
  * Query form schema
  */
 export const querySchema: VbenFormSchema[] = [
+  {
+    component: 'Select',
+    fieldName: 'app_code',
+    label: '应用',
+    componentProps: {
+      allowClear: true,
+      options: getDictOptions('sys_app_code'),
+    },
+  },
   {
     component: 'ModelSelect',
     fieldName: 'model_id',
@@ -36,6 +46,15 @@ export function useColumns(
       type: 'seq',
       fixed: 'left',
       width: 50,
+    },
+    {
+      field: 'app_code',
+      title: '应用',
+      width: 100,
+      cellRender: {
+        name: 'CellTag',
+        options: getDictOptions('sys_app_code'),
+      },
     },
     {
       field: 'model_name',
@@ -104,6 +123,16 @@ export function useColumns(
  * Form schema for add/edit
  */
 export const formSchema: VbenFormSchema[] = [
+  {
+    component: 'Select',
+    fieldName: 'app_code',
+    label: '应用',
+    rules: 'required',
+    defaultValue: 'huanxing',
+    componentProps: {
+      options: getDictOptions('sys_app_code'),
+    },
+  },
   {
     component: 'ModelSelect',
     fieldName: 'model_id',
