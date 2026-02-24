@@ -115,6 +115,15 @@ const [editModal, editModalApi] = useVbenModal({
       editModalApi.lock();
       const data = await editFormApi.getValues<SubscriptionTierParams>();
       try {
+        if (typeof data.features === 'string') {
+          try {
+            data.features = JSON.parse(data.features);
+          } catch {
+            message.error('功能特性 JSON 格式不正确');
+            editModalApi.unlock();
+            return;
+          }
+        }
         await updateSubscriptionTierApi(editId.value, data);
         message.success($t('ui.actionMessage.operationSuccess'));
         await editModalApi.close();
@@ -129,7 +138,10 @@ const [editModal, editModalApi] = useVbenModal({
       const data = editModalApi.getData<SubscriptionTier>();
       editFormApi.resetForm();
       if (data) {
-        editFormApi.setValues(data);
+        editFormApi.setValues({
+          ...data,
+          features: data.features ? JSON.stringify(data.features, null, 2) : '',
+        });
       }
     }
   },
@@ -151,6 +163,15 @@ const [addModal, addModalApi] = useVbenModal({
       addModalApi.lock();
       const data = await addFormApi.getValues<SubscriptionTierParams>();
       try {
+        if (typeof data.features === 'string') {
+          try {
+            data.features = JSON.parse(data.features);
+          } catch {
+            message.error('功能特性 JSON 格式不正确');
+            addModalApi.unlock();
+            return;
+          }
+        }
         await createSubscriptionTierApi(data);
         message.success($t('ui.actionMessage.operationSuccess'));
         await addModalApi.close();
