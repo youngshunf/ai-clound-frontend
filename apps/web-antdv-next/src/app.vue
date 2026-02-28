@@ -27,12 +27,12 @@ const tokenTheme = computed(() => {
     algorithm,
     token: {
       ...tokens,
-      // 智小芽品牌色覆盖
-      colorPrimary: '#3B82F6', // 智慧蓝
-      colorInfo: '#3B82F6',
-      colorLink: '#06B6D4',    // 科技青
+      // 唤星品牌色覆盖
+      colorPrimary: '#6C5CE7', // 星紫
+      colorInfo: '#6C5CE7',
+      colorLink: '#00D2FF',    // 星蓝
       borderRadius: 8,
-      fontFamily: "'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif",
+      fontFamily: "'Inter', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif",
     },
   };
 });

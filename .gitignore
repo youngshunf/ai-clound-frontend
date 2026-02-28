@@ -67,3 +67,4 @@ scripts/deploy/Dockerfile
 README.*.md
 tea.yaml
 vben-admin.code-workspace
+apps/web-antd/

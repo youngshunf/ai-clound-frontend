@@ -1,6 +1,7 @@
 export * from './core';
 export * from './data-permission';
 export * from './dept';
+export * from './huanxing';
 export * from './llm';
 export * from './log';
 export * from './monitor';

@@ -12,7 +12,7 @@ defineOptions({
 });
 
 withDefaults(defineProps<Props>(), {
-  companyName: 'Vben Admin',
+  companyName: '唤星 HuanXing',
   companySiteLink: '',
   date: '2024',
   icp: '',

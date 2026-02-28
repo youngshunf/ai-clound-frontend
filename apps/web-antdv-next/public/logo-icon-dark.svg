@@ -1,30 +1,40 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
   <defs>
-    <linearGradient id="gradID" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#06B6D4"/>
-      <stop offset="100%" stop-color="#8B5CF6"/>
+    <linearGradient id="gradD" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6C5CE7"/>
+      <stop offset="100%" stop-color="#00D2FF"/>
     </linearGradient>
-    <linearGradient id="gradID2" x1="100%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#06B6D4"/>
-      <stop offset="100%" stop-color="#8B5CF6"/>
-    </linearGradient>
-    <filter id="glowID" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="2" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+    <radialGradient id="glowD" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFD93D" stop-opacity="0.8"/>
+      <stop offset="60%" stop-color="#FFD93D" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#FFD93D" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="sgD" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
   
-  <!-- 底圆 - 稍浅色用于深色背景 -->
-  <circle cx="32" cy="36" r="24" fill="#1E293B"/>
-  
-  <!-- 左叶 -->
-  <path d="M32 32 Q20 28 18 14 Q22 24 28 30 Q30 32 32 32" fill="url(#gradID)" filter="url(#glowID)"/>
-  <!-- 右叶 -->
-  <path d="M32 32 Q44 28 46 14 Q42 24 36 30 Q34 32 32 32" fill="url(#gradID2)" filter="url(#glowID)"/>
-  
-  <!-- 底部发光点 -->
-  <circle cx="32" cy="50" r="3.5" fill="url(#gradID)" filter="url(#glowID)"/>
+  <g transform="translate(32, 32)">
+    <!-- 底圆 - 深色 -->
+    <circle cx="0" cy="0" r="20" fill="#1E293B"/>
+    
+    <!-- 光芒射线 -->
+    <g opacity="0.4" filter="url(#sgD)">
+      <line x1="0" y1="-14" x2="0" y2="-19" stroke="url(#gradD)" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="14" y1="0" x2="19" y2="0" stroke="url(#gradD)" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="0" y1="14" x2="0" y2="19" stroke="url(#gradD)" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="-14" y1="0" x2="-19" y2="0" stroke="url(#gradD)" stroke-width="1.2" stroke-linecap="round"/>
+    </g>
+    
+    <!-- 五角星 -->
+    <polygon 
+      points="0,-11 2.6,-3.4 10.5,-3.4 4.2,1.3 6.4,9 0,4.4 -6.4,9 -4.2,1.3 -10.5,-3.4 -2.6,-3.4" 
+      fill="url(#gradD)" 
+      filter="url(#sgD)"/>
+    
+    <!-- 中心光点 -->
+    <circle cx="0" cy="0" r="3.5" fill="url(#glowD)"/>
+    <circle cx="0" cy="0" r="1.5" fill="#FFD93D" filter="url(#sgD)"/>
+  </g>
 </svg>

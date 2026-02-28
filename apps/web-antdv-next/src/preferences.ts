@@ -9,16 +9,17 @@ export const overridesPreferences = defineOverridesPreferences({
   // overrides
   app: {
     accessMode: 'backend',
-    name: import.meta.env.VITE_APP_TITLE || '智小芽',
+    name: import.meta.env.VITE_APP_TITLE || '唤星AI',
     enableRefreshToken: true,
   },
   footer: {
     enable: false,
   },
   logo: {
-    source: '/logo-horizontal.svg',
+    source: '/logo-icon-light.svg',
+    sourceDark: '/logo-icon-dark.svg',
   },
   theme: {
-    mode: 'auto',
+    mode: 'dark',
   },
 });
