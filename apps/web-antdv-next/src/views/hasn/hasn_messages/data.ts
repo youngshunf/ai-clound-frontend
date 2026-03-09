@@ -49,7 +49,7 @@ export const querySchema: VbenFormSchema[] = [
     label: 'status',
     componentProps: {
       allowClear: true,
-      options: getDictOptions('hasn_status'),
+      options: getDictOptions('hasn_msg_status'),
     },
   },
   {
@@ -119,7 +119,7 @@ export function useColumns(
       width: 150,
       cellRender: {
         name: 'CellTag',
-        options: getDictOptions('hasn_status'),
+        options: getDictOptions('hasn_msg_status'),
       },
     },
     {
@@ -209,7 +209,7 @@ export const formSchema: VbenFormSchema[] = [
     label: 'status',
     rules: 'required',
     componentProps: {
-      options: getDictOptions('hasn_status'),
+      options: getDictOptions('hasn_msg_status'),
     },
   },
 ];

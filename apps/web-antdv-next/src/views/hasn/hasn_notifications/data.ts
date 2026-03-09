@@ -25,7 +25,7 @@ export const querySchema: VbenFormSchema[] = [
     label: '类型',
     componentProps: {
       allowClear: true,
-      options: getDictOptions('hasn_type'),
+      options: getDictOptions('hasn_notif_type'),
     },
   },
   {
@@ -61,7 +61,7 @@ export function useColumns(
       width: 150,
       cellRender: {
         name: 'CellTag',
-        options: getDictOptions('hasn_type'),
+        options: getDictOptions('hasn_notif_type'),
       },
     },
     {
@@ -108,7 +108,7 @@ export const formSchema: VbenFormSchema[] = [
     label: '类型',
     rules: 'required',
     componentProps: {
-      options: getDictOptions('hasn_type'),
+      options: getDictOptions('hasn_notif_type'),
     },
   },
   {

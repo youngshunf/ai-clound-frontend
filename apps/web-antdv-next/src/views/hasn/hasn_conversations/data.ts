@@ -19,7 +19,7 @@ export const querySchema: VbenFormSchema[] = [
     label: '类型',
     componentProps: {
       allowClear: true,
-      options: getDictOptions('hasn_type'),
+      options: getDictOptions('hasn_conv_type'),
     },
   },
   {
@@ -52,7 +52,7 @@ export const querySchema: VbenFormSchema[] = [
     label: '状态',
     componentProps: {
       allowClear: true,
-      options: getDictOptions('hasn_status'),
+      options: getDictOptions('hasn_conv_status'),
     },
   },
 ];
@@ -77,7 +77,7 @@ export function useColumns(
       width: 150,
       cellRender: {
         name: 'CellTag',
-        options: getDictOptions('hasn_type'),
+        options: getDictOptions('hasn_conv_type'),
       },
     },
     {
@@ -136,7 +136,7 @@ export function useColumns(
       width: 150,
       cellRender: {
         name: 'CellTag',
-        options: getDictOptions('hasn_status'),
+        options: getDictOptions('hasn_conv_status'),
       },
     },
     {
@@ -167,7 +167,7 @@ export const formSchema: VbenFormSchema[] = [
     label: '类型',
     rules: 'required',
     componentProps: {
-      options: getDictOptions('hasn_type'),
+      options: getDictOptions('hasn_conv_type'),
     },
   },
   {
@@ -245,7 +245,7 @@ export const formSchema: VbenFormSchema[] = [
     label: '状态',
     rules: 'required',
     componentProps: {
-      options: getDictOptions('hasn_status'),
+      options: getDictOptions('hasn_conv_status'),
     },
   },
 ];

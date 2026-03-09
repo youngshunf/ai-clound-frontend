@@ -43,7 +43,7 @@ export const querySchema: VbenFormSchema[] = [
     label: '状态',
     componentProps: {
       allowClear: true,
-      options: getDictOptions('hasn_status'),
+      options: getDictOptions('hasn_agent_status'),
     },
   },
   {
@@ -144,7 +144,7 @@ export function useColumns(
       width: 150,
       cellRender: {
         name: 'CellTag',
-        options: getDictOptions('hasn_status'),
+        options: getDictOptions('hasn_agent_status'),
       },
     },
     {
@@ -297,7 +297,7 @@ export const formSchema: VbenFormSchema[] = [
     label: '状态',
     rules: 'required',
     componentProps: {
-      options: getDictOptions('hasn_status'),
+      options: getDictOptions('hasn_agent_status'),
     },
   },
   {
